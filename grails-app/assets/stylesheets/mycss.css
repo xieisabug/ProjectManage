@@ -1,0 +1,32 @@
+.card {
+	border: 1px solid #B3B3B3;
+	padding: 20px;
+	margin-top: 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+	-moz-box-shadow: 0px 0px 6px #c0c0c0;
+	-webkit-box-shadow: 0px 0px 6px #c0c0c0;
+	box-shadow: 0px 0px 6px #c0c0c0;
+	/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+}
+
+.content {
+	border: 1px solid #B3B3B3;
+	padding: 10px;
+	clear: both;
+}
+
+.title {
+	padding: 10px;
+	border: 1px solid #B3B3B3;
+	border-bottom: 0px;
+	width: 80px; text-align : center;
+	float: left;
+	text-align: center;
+}
+
+.hover_tab {
+	background: #abc;
+}
