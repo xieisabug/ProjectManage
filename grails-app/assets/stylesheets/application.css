@@ -5,8 +5,18 @@
 #card-container{
     min-height: 300px;
 }
-#interface-card {
+#interface-card{
+    padding: 20px;
+    background: #673AB7;
 }
+#interface-card,#interface-card a {
+    color: #EDE7F6;
+ }
 #interface-card a{
     text-decoration: none;
+}
+
+#category-list button{
+    width: 100%;
+    height: 40px;
 }
