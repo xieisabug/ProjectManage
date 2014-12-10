@@ -4,7 +4,7 @@ class Param {
     String name
     String remark
 
-    static belongsTo =  InterfaceObject
+    static belongsTo =  [interface:InterfaceObject]
 
     static constraints = {
         name nullable: false,blank: false

@@ -11,8 +11,8 @@
     <md-toolbar layout="row" style="margin-bottom: 20px;">
         <div class="md-toolbar-tools">
             <md-button class="md-raised md-primary" md-theme="green"
-                       style="width: 100px; height:30px; margin-right: 5px;">主页</md-button>
-            <md-button style="width: 100px; height:30px;">添加接口</md-button>
+                       style="width: 100px; height:30px; margin-right: 5px;" ng-click="home()">主页</md-button>
+            <md-button style="width: 100px; height:30px;" ng-click="addInterfaceObject($event)">添加接口</md-button>
         </div>
     </md-toolbar>
 
@@ -29,7 +29,7 @@
 
                         <div flex><h4>{{item.method}}</h4></div>
                         <md-button class="md-raised md-primary" md-theme="red"
-                                   style="width: 100px; height:30px; margin-right: 5px;">删除</md-button>
+                                   style="width: 100px; height:30px; margin-right: 5px;" ng-click="deleteInterfaceObject(item, $index)">删除</md-button>
                         <md-button class="md-raised md-primary" style="width: 100px; height:30px;">编辑</md-button>
                     </div>
                 </md-item>

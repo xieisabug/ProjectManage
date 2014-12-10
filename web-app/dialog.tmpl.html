@@ -1,0 +1,35 @@
+<md-dialog aria-label="新建接口" style="width:400px;">
+    <md-content>
+        <md-subheader class="md-sticky-no-effect">新建接口</md-subheader>
+        <div layout="row">
+            <md-text-float label="名称" ng-model="newInterface.name" flex></md-text-float>
+            <md-text-float label="链接" ng-model="newInterface.link" flex style="margin-top: 0;"></md-text-float>
+        </div>
+        <md-text-float label="方法" ng-model="newInterface.method"></md-text-float>
+        <h3>参数：</h3>
+        <md-list>
+            <md-item layout="row" ng-repeat="item in newInterface.params" style="height: 30px; padding: 5px;"
+                     layout-align="center center">
+                <div flex="40">{{item.name}}</div>
+                <div flex>{{item.remark}}</div>
+                <md-button ng-click="deleteNewInterface($index)" style="width: 50px"
+                           class="md-primary md-raised" md-theme="red">X
+                </md-button>
+            </md-item>
+        </md-list>
+
+        <div layout="row">
+            <md-text-float label="名称" ng-model="paramName" flex></md-text-float>
+            <md-text-float label="注释" ng-model="paramRemark" flex style="margin-top: 0;"></md-text-float>
+        </div>
+        <md-button ng-click="addParam()" class="md-primary md-raised" style="width: 100px; height: 30px;">
+            添加参数
+        </md-button>
+        <md-text-float label="备注" ng-model="newInterface.remark"></md-text-float>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="add()" class="md-primary md-raised" style="width: 100px; height: 30px;">
+            添加
+        </md-button>
+    </div>
+</md-dialog>
