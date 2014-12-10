@@ -8,34 +8,30 @@
 
 <body>
 <div ng-controller="InterfaceView">
-    <md-tabs md-selected="data.selectedIndex">
-        <md-tab ng-repeat="c in category" id="tab{{$index}}" aria-controls="tab{{$index}}-content">
-            {{c.name}}
+    <md-tabs md-selected="data.selectedIndex"  style="width: 960px; margin: 0 auto;">
+        <md-tab ng-repeat="c in category" label="{{c.name}}" layout="row">
+            <div ng-repeat="interfaceObject in c.interfaceObjects" flex="33">
+                <md-card>
+                    <div class="card">
+                        <div>接口名：{{interfaceObject.name}}</div>
+
+                        <div>接口方法类型：{{interfaceObject.method}}</div>
+
+                        <div>接口地址：{{interfaceObject.link}}</div>
+
+                        <div>接口简介：{{interfaceObject.remark}}</div>
+
+                        <div>
+                            <form action="/InterfaceManage/interfaceView/testInterface" method="post">
+                                <input type="hidden" name="interfaceId" value="{{i.id}}"/>
+                                <md-text-float ng-repeat="p in interfaceObject.params" label="{{ p.name + '  ' + p.remark}}" name="{{p.name}}">
+                            </form>
+                        </div>
+                    </div>
+                </md-card>
+            </div>
         </md-tab>
     </md-tabs>
-    <ng-switch on="data.selectedIndex" class="tabpanel-container">
-        <div ng-repeat="c in category" role="tabpanel" id="tab{{$index}}-content" aria-labelledby="tab{{$index}}"
-             ng-switch-when="{{$index}}" md-swipe-left="next()" md-swipe-right="previous()">
-            <md-card ng-repeat="i in c.interfaceObjects">
-                <div class="card">
-                    <div>接口名：{{i.name}}</div>
-
-                    <div>接口方法类型：{{i.method}}</div>
-
-                    <div>接口地址：{{i.link}}</div>
-
-                    <div>接口简介：{{i.remark}}</div>
-
-                    <div>
-                        <form action="/InterfaceManage/interfaceView/testInterface" method="post">
-                            <input type="hidden" name="interfaceId" value="{{i.id}}"/>
-                            <md-text-float ng-repeat="p in i.params" label="{{ p.name + '  ' + p.remark}}" name="{{p.name}}">
-                        </form>
-                    </div>
-                </div>
-            </md-card>
-        </div>
-    </ng-switch>
 </div>
 
 %{--<g:each in="${categorys}" var="category" status="index">
