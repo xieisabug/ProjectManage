@@ -1,11 +1,10 @@
 app = angular.module('application', ['ngMaterial']);
-app.controller('InterfaceObject', function ($scope, $http, $mdDialog, $window) {
+app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.category = [];
     $scope.interface = [];
     $scope.currentCategory = null;
 
     $http.get('/InterfaceManage/interfaceObject/getCategory').success(function (response) {
-        console.log(response);
         if (response && response.length != 0) {
             $scope.category = response;
             $scope.interface = $scope.category[0].interfaceObjects;
@@ -78,4 +77,19 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog, $window) {
             $scope.newInterface.params.splice(item,1);
         }
     }
+});
+app.controller('InterfaceView',function($scope,$http){
+    $scope.category = [];
+    $scope.data = {
+        selectedIndex:0
+    };
+
+    $http.get('/InterfaceManage/interfaceView/getCategory').success(function (response) {
+        if (response && response.length != 0) {
+            $scope.category = response;
+            console.log($scope.category);
+        }
+    });
+
+
 });

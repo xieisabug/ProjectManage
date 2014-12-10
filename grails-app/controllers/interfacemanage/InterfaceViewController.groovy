@@ -15,14 +15,18 @@ class InterfaceViewController {
 	Gson gson = new Gson();
 	
     def index() {
-		def categorys = Category.list();
-		return [categorys:categorys]
 	}
-	
+
+	def getCategory() {
+		render(contentType: "text/json") {
+			Category.list()
+		}
+	}
+
 	def testInterface(){
 		def interfaceObj = InterfaceObject.get(params.interfaceId)
 		Request rq = null
-		//POSTÇëÇó
+		//POSTï¿½ï¿½ï¿½ï¿½
 		if (interfaceObj.method.equals("POST")) {
 			def json = gson.toJson(params);
 			RequestBody rb = RequestBody.create(JSON, json);
