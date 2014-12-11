@@ -41,6 +41,5 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 	var json = ${content};
 	output(syntaxHighlight(json));
 </script>
-	<div id="content"></div>
 </body>
 </html>
