@@ -23,8 +23,14 @@
 
                         <div>
                             <form action="/InterfaceManage/interfaceView/testInterface" method="post">
-                                <input type="hidden" name="interfaceId" value="{{i.id}}"/>
-                                <md-text-float ng-repeat="p in interfaceObject.params" label="{{ p.name + '  ' + p.remark}}" name="{{p.name}}">
+                                <input type="hidden" name="interfaceId" value="{{interfaceObject.id}}"/>
+                                <div>
+                                    <label ng-repeat="p in interfaceObject.params">
+                                        {{ p.name + ' : ' + p.remark}}
+                                        <input name="{{p.name}}" type="text">
+                                    </label>
+                                </div>
+                                <input type="submit" name="submit" value="测试">
                             </form>
                         </div>
                     </div>
@@ -33,19 +39,5 @@
         </md-tab>
     </md-tabs>
 </div>
-
-%{--<g:each in="${categorys}" var="category" status="index">
-    <div class="title <g:if test="${index == 0}">hover_tab</g:if>">
-        ${category.name}
-    </div>
-</g:each>
-<g:each in="${categorys}" var="category" status="index">
-    <div class="content" <g:if test="${index != 0}">style="display:none"</g:if>>
-        <g:each in="${category.interfaceObjects}" var="interfaceObject"
-                status="interfaceIndex">
-            <g:render template="item" model="[interfaceObject: interfaceObject]"></g:render>
-        </g:each>
-    </div>
-</g:each>--}%
 </body>
 </html>

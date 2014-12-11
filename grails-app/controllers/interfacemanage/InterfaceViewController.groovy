@@ -26,7 +26,6 @@ class InterfaceViewController {
 	def testInterface(){
 		def interfaceObj = InterfaceObject.get(params.interfaceId)
 		Request rq = null
-		//POST����
 		if (interfaceObj.method.equals("POST")) {
 			def json = gson.toJson(params);
 			RequestBody rb = RequestBody.create(JSON, json);
@@ -36,8 +35,8 @@ class InterfaceViewController {
 			.build()
 		} else if (interfaceObj.method.equals("GET")) {
 			String l = interfaceObj.link+"?1=1"
-			for (param in interfaceObj.param.split(",")) {
-				l += "&" + param+"="+params[param]
+			for (param in interfaceObj.params) {
+				l += "&" + param.name+"="+params[param.name]
 			}
 			rq = new Request.Builder()
 			.url(l)
