@@ -54,7 +54,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         $scope.newInterface = {
             name:'',
             link:'',
-            method:'',
+            method:'POST',
             returnExample:'',
             remark:'',
             params:[
