@@ -25,7 +25,8 @@
         <md-button ng-click="addParam()" class="md-primary md-raised" style="width: 100px; height: 30px;">
             添加参数
         </md-button>
-        <md-text-float label="备注" ng-model="newInterface.remark"></md-text-float>
+        <md-text-float label="返回示例" ng-model="newInterface.returnExample" flex></md-text-float>
+        <md-text-float label="返回示例说明" ng-model="newInterface.remark" flex></md-text-float>
     </md-content>
     <div class="md-actions" layout="row">
         <md-button ng-click="add()" class="md-primary md-raised" style="width: 100px; height: 30px;">

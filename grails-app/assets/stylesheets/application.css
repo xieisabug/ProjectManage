@@ -20,3 +20,9 @@
     width: 100%;
     height: 40px;
 }
+.card {
+    
+}
+.card .field {
+    padding: 5px;
+}

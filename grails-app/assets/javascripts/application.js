@@ -41,10 +41,12 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         });
     };
 
-    $scope.deleteInterfaceObject = function (interfaceObject) {
+    $scope.deleteInterfaceObject = function (interfaceObject, index) {
         $http.post('/InterfaceManage/interfaceObject/deleteInterfaceObject', {id: interfaceObject.id})
             .success(function (response) {
-                console.log(response);
+                if(response.success) {
+                    $scope.interface.splice(index, 1);
+                }
             });
     };
 
@@ -53,6 +55,8 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             name:'',
             link:'',
             method:'',
+            returnExample:'',
+            remark:'',
             params:[
             ]
         };
@@ -87,7 +91,7 @@ app.controller('InterfaceView',function($scope,$http){
     $http.get('/InterfaceManage/interfaceView/getCategory').success(function (response) {
         if (response && response.length != 0) {
             $scope.category = response;
-            console.log($scope.category);
+            //console.log($scope.category);
         }
     });
 
