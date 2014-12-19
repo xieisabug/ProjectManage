@@ -1,4 +1,6 @@
 InterfaceManage
 ===============
 
-接口管理工具，基于Grails
+项目管理工具集，基于Grails和angularJs
+
+目前还仅仅只包含接口管理。
