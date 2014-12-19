@@ -1,5 +1,8 @@
 package interfacemanage
 
+/**
+ * 接口类别
+ */
 class Category {
 
 	String name

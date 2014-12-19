@@ -14,6 +14,9 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 </head>
 <body>
 <script type="text/javascript">
+	/**
+	 * 下面的函数是将返回的json进行格式化，并且着色，让json数据看起来更加美观
+	 */
 	function output(inp) {
 		document.body.appendChild(document.createElement('pre')).innerHTML = inp;
 	}

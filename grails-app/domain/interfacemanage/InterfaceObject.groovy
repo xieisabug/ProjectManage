@@ -1,5 +1,8 @@
 package interfacemanage
 
+/**
+ * 接口对象
+ */
 class InterfaceObject {
 
     String name
