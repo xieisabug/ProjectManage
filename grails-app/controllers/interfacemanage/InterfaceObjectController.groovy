@@ -90,4 +90,14 @@ class InterfaceObjectController {
             success=true
         }
     }
+
+    def changeLink(){
+        def p = request.JSON;
+        def interfaceObject = InterfaceObject.get(p.id)
+        interfaceObject.link = p.link
+        interfaceObject.save(flush: true, failOnError: true)
+        render(contentType: "text/json") {
+            success=true
+        }
+    }
 }

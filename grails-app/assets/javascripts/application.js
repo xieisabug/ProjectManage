@@ -82,7 +82,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         }
     }
 });
-app.controller('InterfaceView',function($scope,$http){
+app.controller('InterfaceView',function($scope, $http, $mdDialog){
     $scope.category = [];
     $scope.data = {
         selectedIndex:0
@@ -95,5 +95,38 @@ app.controller('InterfaceView',function($scope,$http){
         }
     });
 
+    $scope.changeLink = function(interfaceObject, parentIndex, index, ev){
+        $mdDialog.show({
+            controller: ChangeLinkDialogController,
+            templateUrl: '/InterfaceManage/changeLinkDialog.tmpl.html?t='+new Date(),
+            targetEvent: ev
+        }).then(function(newLink){
+            interfaceObject.link = newLink;
+            $http.post('/InterfaceManage/interfaceObject/changeLink', interfaceObject)
+                .success(function (response) {
+                    console.log(response);
+                    console.log(interfaceObject);
+                    console.log(index);
+                    if(response.success) {
+                        $scope.category[parentIndex].interfaceObjects[index] = interfaceObject;
+                    }
+                });
+        }, function(){
+
+        });
+    };
+    function ChangeLinkDialogController($scope){
+        $scope.newLink = '';
+
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+        $scope.submit = function() {
+            $mdDialog.hide($scope.newLink);
+        };
+    }
 
 });
