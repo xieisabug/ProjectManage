@@ -16,7 +16,7 @@
 
                         <div class="field">接口方法类型：{{interfaceObject.method}}</div>
 
-                        <div class="field">接口地址：{{interfaceObject.link}}</div>
+                        <div class="field">接口地址：{{interfaceObject.link}} <md-button ng-click="changeLink(interfaceObject,$parent.$index, $index)" class="md-primary md-raised">修改地址</md-button></div>
 
                         <div class="field">接口返回示例：{{interfaceObject.returnExample}}</div>
 

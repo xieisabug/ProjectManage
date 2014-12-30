@@ -1,5 +1,8 @@
 package interfacemanage
 
+/**
+ * 接口参数
+ */
 class Param {
     String name
     String remark
