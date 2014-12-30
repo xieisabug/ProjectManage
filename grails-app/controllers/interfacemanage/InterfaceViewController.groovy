@@ -1,5 +1,7 @@
 package interfacemanage
 
+import com.squareup.okhttp.FormEncodingBuilder
+
 import java.util.ResourceBundle.RBClassLoader;
 
 import com.google.gson.Gson;
@@ -45,13 +47,20 @@ class InterfaceViewController {
 		//request对象
 		Request rq = null
 		if (interfaceObj.method.equals("POST")) {//如果是POST方法
-			//测试接口填写的参数数据
-			def json = gson.toJson(params);
+			//创建form表单
+			FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
+			params.each {
+				if (it.key != 'format' && it.key != 'action') {
+					println(it.key + ":" + it.value)
+					formEncodingBuilder.add(it.key, it.value)
+				}
+			}
 			//创建一个request
-			RequestBody rb = RequestBody.create(JSON, json);
+			RequestBody formBody = formEncodingBuilder.build();
+
 			rq = new Request.Builder()
 			.url(interfaceObj.link)
-			.post(rb)
+			.post(formBody)
 			.build()
 		} else if (interfaceObj.method.equals("GET")) {//如果是GET方法
 			//1=1方便后面的参数拼接
