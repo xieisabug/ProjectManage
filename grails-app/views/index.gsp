@@ -19,17 +19,7 @@
 
 
     </md-card>
-    <md-card id="product-card" flex layout-align="center center">
-        <h2>项目管理工具</h2>
-        <div layout="row">
-            <md-button class="md-raised md-primary" ng-href="">项目管理</md-button>
-            <md-button class="md-raised md-primary" ng-href="">人员管理</md-button>
-        </div>
-        <div layout="row">
-            <md-button class="md-raised md-primary" ng-href="">任务管理</md-button>
-            <md-button class="md-raised md-primary" ng-href="">报表管理</md-button>
-        </div>
-    </md-card>
+    <span flex></span>
     <span flex></span>
 </div>
 </body>

@@ -3,8 +3,8 @@ dataSource {
     jmxExport = true
 //    driverClassName = "org.h2.Driver"
 	driverClassName = "com.mysql.jdbc.Driver"
-    username = "admin"
-    password = "640310"
+    username = "root"
+    password = "123456"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -21,19 +21,19 @@ environments {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
 //            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-			url = "jdbc:mysql://120.24.228.201:3306/interface_manage"
+			url = "jdbc:mysql://192.168.1.216:3306/interface_manage"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://120.24.228.201:3306/interface_manage"
+            url = "jdbc:mysql://192.168.1.216:3306/interface_manage"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://120.24.228.201:3306/interface_manage"
+            url = "jdbc:mysql://192.168.1.216:3306/interface_manage"
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
