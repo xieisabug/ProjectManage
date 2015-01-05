@@ -3,17 +3,14 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
     $scope.addProduct = function(ev) {
         $mdDialog.show({
             controller: AddProductController,
-            templateUrl: '/InterfaceManage/changeLinkDialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/addProductDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
-        }).then(function(newLink){
-            interfaceObject.link = newLink;
-            $http.post('/InterfaceManage/interfaceObject/changeLink', interfaceObject)
+        }).then(function(newProduct){
+            console.log(newProduct);
+            $http.post('/InterfaceManage/Product/addProduct', newProduct)
                 .success(function (response) {
                     console.log(response);
-                    console.log(interfaceObject);
-                    console.log(index);
                     if(response.success) {
-                        $scope.category[parentIndex].interfaceObjects[index] = interfaceObject;
                     }
                 });
         }, function(){

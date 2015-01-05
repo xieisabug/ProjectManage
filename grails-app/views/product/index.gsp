@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>项目管理</title>
-    <meta name="layout" content="main"/>
+    <meta name="layout" content="requirement"/>
 </head>
 
 <body>
