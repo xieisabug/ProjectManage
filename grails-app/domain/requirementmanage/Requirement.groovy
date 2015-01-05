@@ -2,7 +2,6 @@ package requirementmanage
 
 class Requirement {
     int id;
-    int productId;
     int detail;
     int priority;
     Date createDate;

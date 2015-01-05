@@ -2,7 +2,6 @@ package requirementmanage
 
 class DetailDesign {
     int id;
-    int designId;
     String details;
     Date createDate;
     int status;
