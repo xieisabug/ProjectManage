@@ -1,0 +1,15 @@
+<md-dialog aria-label="新增项目" style="width:400px;">
+    <md-content>
+        <md-subheader class="md-sticky-no-effect">新增项目</md-subheader>
+        <div layout="row">
+            <md-text-float label="项目名" ng-model="newProduct.name" flex style="margin-top: 0;"></md-text-float>
+            <md-text-float label="简介" ng-model="newProduct.introduce" flex style="margin-top: 0;"></md-text-float>
+            <md-text-float label="LOGO" ng-model="newProduct.logo" flex style="margin-top: 0;"></md-text-float>
+        </div>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="submit()" class="md-primary md-raised" style="width: 100px; height: 30px;">
+            添加
+        </md-button>
+    </div>
+</md-dialog>
