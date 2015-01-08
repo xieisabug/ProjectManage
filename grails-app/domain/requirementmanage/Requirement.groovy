@@ -2,11 +2,11 @@ package requirementmanage
 
 class Requirement {
     int id;
-    int detail;
+    String detail;
     int priority;
     Date createDate;
     int status;
-    int reason;
+    String reason;
     Date updateDate;
     static belongsTo = [product: Product]
     static hasMany = [designs : Design]

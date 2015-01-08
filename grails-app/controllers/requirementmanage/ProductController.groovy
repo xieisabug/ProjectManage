@@ -16,6 +16,9 @@ class ProductController {
         product.setProperties(p)
         product.setCreateDate(new Date())
         product.save(flush: true, failOnError: true)
+        render(contentType: "text/json") {
+            success = true
+        }
     }
 
     def listProduct(){
