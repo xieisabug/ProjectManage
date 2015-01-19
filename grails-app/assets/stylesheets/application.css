@@ -14,12 +14,16 @@
     padding: 20px;
     background: #673AB7;
 }
-#interface-card,#product-card,#interface-card a,#product-card a {
-    color: #EDE7F6;
- }
+.card-color, .card-color a {
+    color:#EDE7F6;
+}
 #product-card {
     padding: 20px;
     background: #00BCD4;
+}
+#wiki-card {
+    padding: 20px;
+    background: #795548;
 }
 #category-list button{
     width: 100%;
