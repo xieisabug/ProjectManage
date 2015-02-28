@@ -30,7 +30,13 @@
             <md-button class="md-raised md-primary" ng-href="">报表管理</md-button>
         </div>
     </md-card>
-    <span flex></span>
+    <md-card id="wiki-card" flex layout-align="center center" class="card-color">
+        <h2>Wiki工具</h2>
+        <div layout="row">
+            <md-button class="md-raised md-primary" ng-href="<g:createLink controller="wiki"></g:createLink>">wiki首页</md-button>
+        </div>
+
+    </md-card>
 </div>
 </body>
 </html>
