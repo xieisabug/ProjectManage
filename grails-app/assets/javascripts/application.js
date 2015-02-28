@@ -41,13 +41,24 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         });
     };
 
-    $scope.deleteInterfaceObject = function (interfaceObject, index) {
-        $http.post('/InterfaceManage/interfaceObject/deleteInterfaceObject', {id: interfaceObject.id})
-            .success(function (response) {
-                if(response.success) {
-                    $scope.interface.splice(index, 1);
-                }
-            });
+    $scope.deleteInterfaceObject = function (ev, interfaceObject, index) {
+        var confirm = $mdDialog.confirm()
+            .title('删除接口?')
+            .content('您确定要删除 ' + interfaceObject.name + ' 吗？')
+            .ariaLabel('Lucky day')
+            .ok('确定')
+            .cancel('取消')
+            .targetEvent(ev);
+        $mdDialog.show(confirm).then(function() {
+            $http.post('/InterfaceManage/interfaceObject/deleteInterfaceObject', {id: interfaceObject.id})
+                .success(function (response) {
+                    if(response.success) {
+                        $scope.interface.splice(index, 1);
+                    }
+                });
+        }, function() {
+
+        });
     };
 
     function DialogController($scope){
