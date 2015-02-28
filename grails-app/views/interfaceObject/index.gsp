@@ -30,7 +30,7 @@
                         <div flex><h4>{{item.method}}</h4></div>
                         <md-button class="md-raised md-primary" md-theme="red"
                                    style="width: 100px; height:30px; margin-right: 5px;" ng-click="deleteInterfaceObject($event, item, $index)">删除</md-button>
-                        <md-button class="md-raised md-primary" style="width: 100px; height:30px;">编辑</md-button>
+                        <md-button class="md-raised md-primary" style="width: 100px; height:30px;" ng-click="editInterfaceObject($event, item)">编辑</md-button>
                     </div>
                 </md-item>
             </md-list>

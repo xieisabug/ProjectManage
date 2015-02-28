@@ -61,6 +61,65 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         });
     };
 
+    $scope.editInterfaceObject = function(ev, interfaceObject){
+        $mdDialog.show({
+            controller: UpdateDialogController,
+            locals:{
+                interfaceObject : interfaceObject
+            },
+            templateUrl: '/InterfaceManage/dialog.tmpl.html?t='+new Date(),
+            targetEvent: ev
+        }).then(function(newInterfaceObject){
+            newInterfaceObject.categoryId = $scope.currentCategory.id;
+            $http.post('/InterfaceManage/interfaceObject/updateInterfaceObject', newInterfaceObject)
+                .success(function (response) {
+                    console.log(response);
+                    var alert;
+                    if(response.success) {
+                        alert = $mdDialog.alert({
+                            title: '成功',
+                            content: '修改接口成功',
+                            ok: '关闭'
+                        });
+                    } else {
+                        alert = $mdDialog.alert({
+                            title: '失败',
+                            content: '修改接口失败',
+                            ok: '关闭'
+                        });
+                    }
+                    $mdDialog.show(alert);
+
+                });
+        }, function(){
+
+        });
+
+        function UpdateDialogController($scope, interfaceObject){
+            $scope.newInterface = interfaceObject;
+            $scope.paramName="";
+            $scope.paramRemark="";
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.add = function() {
+                $mdDialog.hide($scope.newInterface);
+            };
+            $scope.addParam = function(){
+                $scope.newInterface.params.push({name:$scope.paramName, remark:$scope.paramRemark});
+                $scope.paramName = "";
+                $scope.paramRemark = "";
+            };
+            $scope.deleteNewInterface = function(item) {
+                $scope.newInterface.params.splice(item,1);
+            }
+        }
+    };
+
     function DialogController($scope){
         $scope.newInterface = {
             name:'',
