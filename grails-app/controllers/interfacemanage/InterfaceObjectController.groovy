@@ -91,6 +91,36 @@ class InterfaceObjectController {
         }
     }
 
+    def updateInterfaceObject(){
+        def p = request.JSON
+        def interfaceObject = InterfaceObject.get(p.id)
+        interfaceObject.link = p.link
+        interfaceObject.method = p.method
+        interfaceObject.name = p.name
+        interfaceObject.remark = p.remark
+        interfaceObject.returnExample = p.returnExample
+
+        //循环添加参数对象
+        for (param in p.addList) {
+            Param item = new Param()
+            item.name = param.name
+            item.remark = param.remark
+            //设置依赖
+            interfaceObject.addToParams(item)
+        }
+        for (param in p.deleteList) {
+            Param item = Param.get(param.id)
+            interfaceObject.removeFromParams(item)
+            item.delete()
+        }
+        //保存一次参数对象依赖
+        interfaceObject.save(flush: true,failOnError: true)
+
+        render(contentType: "text/json") {
+            success=true
+        }
+    }
+
     def changeLink(){
         def p = request.JSON;
         def interfaceObject = InterfaceObject.get(p.id)
