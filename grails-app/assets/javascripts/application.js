@@ -97,6 +97,8 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
 
         function UpdateDialogController($scope, interfaceObject){
             $scope.newInterface = interfaceObject;
+            $scope.newInterface.addList = [];
+            $scope.newInterface.deleteList = [];
             $scope.paramName="";
             $scope.paramRemark="";
 
@@ -110,11 +112,23 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
                 $mdDialog.hide($scope.newInterface);
             };
             $scope.addParam = function(){
+                $scope.newInterface.addList.push({name:$scope.paramName, remark:$scope.paramRemark});
                 $scope.newInterface.params.push({name:$scope.paramName, remark:$scope.paramRemark});
                 $scope.paramName = "";
                 $scope.paramRemark = "";
             };
             $scope.deleteNewInterface = function(item) {
+                var params = $scope.newInterface.params[item];
+                if(params.id) {
+                    $scope.newInterface.deleteList.push(params);
+                } else {
+                    for(var i = 0; i < $scope.newInterface.addList.length; i++) {
+                        if(params.name == $scope.newInterface.addList[i].name && params.remark == $scope.newInterface.addList[i].remark) {
+                            $scope.newInterface.addList.splice(i,1);
+                            break;
+                        }
+                    }
+                }
                 $scope.newInterface.params.splice(item,1);
             }
         }
