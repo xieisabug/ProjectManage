@@ -25,7 +25,8 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.addInterfaceObject = function (ev) {
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: '/InterfaceManage/dialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/dialog.tmpl.html',
+            parent: document.body,
             targetEvent: ev
         }).then(function(newInterfaceObject){
             newInterfaceObject.categoryId = $scope.currentCategory.id;

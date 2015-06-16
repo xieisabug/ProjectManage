@@ -1,33 +1,58 @@
 <md-dialog aria-label="新建接口" style="width:400px;">
-    <md-content>
-        <md-subheader class="md-sticky-no-effect">新建接口</md-subheader>
-        <div layout="row">
-            <md-text-float label="名称" ng-model="newInterface.name" flex></md-text-float>
-            <md-text-float label="链接" ng-model="newInterface.link" flex style="margin-top: 0;"></md-text-float>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>新建接口</h2>
         </div>
-        <md-text-float label="方法" ng-model="newInterface.method"></md-text-float>
+    </md-toolbar>
+    <md-dialog-content>
+        <div layout="row">
+            <md-input-container flex>
+                <label>名称</label>
+                <input ng-model="newInterface.name">
+            </md-input-container>
+            <md-input-container flex style="margin-top: 0;">
+                <label>链接</label>
+                <input ng-model="newInterface.link">
+            </md-input-container>
+        </div>
+        <md-input-container flex>
+            <label>方法</label>
+            <input ng-model="newInterface.method">
+        </md-input-container>
         <h3>参数：</h3>
         <md-list>
-            <md-item layout="row" ng-repeat="item in newInterface.params" style="height: 30px; padding: 5px;"
+            <md-list-item layout="row" ng-repeat="item in newInterface.params" style="height: 30px; padding: 5px;"
                      layout-align="center center">
                 <div flex="40">{{item.name}}</div>
                 <div flex>{{item.remark}}</div>
                 <md-button ng-click="deleteNewInterface($index)" style="width: 50px"
                            class="md-primary md-raised" md-theme="red">X
                 </md-button>
-            </md-item>
+            </md-list-item>
         </md-list>
 
         <div layout="row">
-            <md-text-float label="名称" ng-model="paramName" flex></md-text-float>
-            <md-text-float label="注释" ng-model="paramRemark" flex style="margin-top: 0;"></md-text-float>
+            <md-input-container flex>
+                <label>名称</label>
+                <input ng-model="paramName">
+            </md-input-container>
+            <md-input-container flex style="margin-top: 0;">
+                <label>注释</label>
+                <input ng-model="paramRemark">
+            </md-input-container>
         </div>
         <md-button ng-click="addParam()" class="md-primary md-raised" style="width: 100px; height: 30px;">
             添加参数
         </md-button>
-        <md-text-float label="返回示例" ng-model="newInterface.returnExample" flex></md-text-float>
-        <md-text-float label="返回示例说明" ng-model="newInterface.remark" flex></md-text-float>
-    </md-content>
+        <md-input-container flex>
+            <label>返回示例</label>
+            <input ng-model="newInterface.returnExample">
+        </md-input-container>
+        <md-input-container flex>
+            <label>返回示例说明</label>
+            <input ng-model="newInterface.remark">
+        </md-input-container>
+    </md-dialog-content>
     <div class="md-actions" layout="row">
         <md-button ng-click="add()" class="md-primary md-raised" style="width: 100px; height: 30px;">
             确定
