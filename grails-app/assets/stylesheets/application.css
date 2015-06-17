@@ -7,19 +7,23 @@
 }
 
 #card-container .md-button{
-    min-width:10em;
+    min-width: 9em;
     margin: .3em;
 }
 #interface-card{
     padding: 20px;
     background: #673AB7;
 }
-#interface-card,#product-card,#interface-card a,#product-card a {
+#interface-card,#product-card,#wiki-card,#interface-card a,#product-card a,#wiki-card a {
     color: #EDE7F6;
  }
 #product-card {
     padding: 20px;
     background: #00BCD4;
+}
+#wiki-card{
+    padding: 20px;
+    background: #ff9800;
 }
 #category-list button{
     width: 100%;

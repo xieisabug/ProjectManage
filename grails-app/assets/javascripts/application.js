@@ -25,7 +25,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.addInterfaceObject = function (ev) {
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: '/InterfaceManage/dialog.tmpl.html',
+            templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html',
             parent: document.body,
             targetEvent: ev
         }).then(function(newInterfaceObject){
@@ -68,7 +68,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             locals:{
                 interfaceObject : interfaceObject
             },
-            templateUrl: '/InterfaceManage/dialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
         }).then(function(newInterfaceObject){
             newInterfaceObject.categoryId = $scope.currentCategory.id;
