@@ -26,7 +26,7 @@
 <asset:javascript src="application.js"/>
 <div id="container">
     <md-toolbar class="md-medium-tall">
-        <h2 class="md-toolbar-tools">自驾友工具集</h2>
+        <h2 class="md-toolbar-tools">项目工具集</h2>
     </md-toolbar>
 </div>
 
