@@ -1,4 +1,4 @@
-InterfaceManage
+ProjectManage
 ===============
 
 项目管理工具集，基于Grails和angularJs
