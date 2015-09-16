@@ -2,10 +2,11 @@ package requirementmanage
 
 class Task {
     int id;
-    Date createDate;
     int status;
     String reason;
-    Date updateDate;
+    Date dateCreated
+    Date lastUpdated
+
     static constraints = {
     }
 }

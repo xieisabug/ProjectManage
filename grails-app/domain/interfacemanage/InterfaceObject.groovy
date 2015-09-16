@@ -10,6 +10,8 @@ class InterfaceObject {
     String returnExample //返回示例
     String remark //备注
     String method //使用的方法类型
+    Date dateCreated
+    Date lastUpdated
 
     static belongsTo = [category: Category] //接口属于哪一个类别
     static hasMany = [params: Param] //接口包含的参数

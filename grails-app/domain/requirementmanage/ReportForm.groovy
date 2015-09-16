@@ -7,8 +7,8 @@ class ReportForm {
     String sqlString;
     String colunms;
     String colunmNames;
-    Date createDate;
-
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
     }

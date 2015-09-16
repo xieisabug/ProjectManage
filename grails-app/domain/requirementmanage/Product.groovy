@@ -5,7 +5,8 @@ class Product {
     String name;
     String introduce;
     String logo;
-    Date createDate;
+    Date dateCreated
+    Date lastUpdated
 
     static hasMany = [requirements : Requirement]
     static constraints = {

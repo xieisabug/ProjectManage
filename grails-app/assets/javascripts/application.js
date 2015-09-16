@@ -1,4 +1,17 @@
 app = angular.module('application', ['ngMaterial']);
+app.controller('Login', function ($scope, $http) {
+
+    $scope.user = {};
+
+    $scope.login = function() {
+        console.log($scope.user);
+        $http.post('/InterfaceManage/index/loginExecute', $scope.user)
+            .success(function (response) {
+                console.log(response);
+            });
+    };
+
+});
 app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.category = [];
     $scope.interface = [];

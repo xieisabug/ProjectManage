@@ -1,14 +1,20 @@
 package wiki
 
+import system.Project
+
 /**
  * Wiki
  */
 class Wiki {
 
-    String name //wikiµÄÃû³Æ
-    String content //wikiµÄÄÚÈİ£¬markdown¸ñÊ½
+    String name //wikiçš„åç§°
+    String content //wikiçš„å†…å®¹ï¼Œmarkdownæ ¼å¼
+    Date dateCreated
+    Date lastUpdated
+
+    static belongsTo = [project : Project]
 
     static constraints = {
-        content maxSize: 5000 //×î´ó5000¸ö×Ö
+        content maxSize: 5000 //æœ€å¤§5000ä¸ªå­—
     }
 }

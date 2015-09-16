@@ -17,7 +17,7 @@
     <g:layoutHead/>
 </head>
 
-<body>
+<body layout="column">
 <asset:javascript src="hammer.min.js"/>
 <asset:javascript src="angular.js"/>
 <asset:javascript src="angular-animate.js"/>
