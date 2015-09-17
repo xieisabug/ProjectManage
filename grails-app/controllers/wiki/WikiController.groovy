@@ -4,6 +4,15 @@ import system.Project
 
 class WikiController {
 
+    def beforeInterceptor = [action: this.&auth]
+
+    def auth() {
+        if(!session.user) {
+            redirect(controller: 'index', action:'login')
+            return false
+        }
+    }
+
     def index() {
         redirect(action: 'go', params: [name: 'index'])
     }
