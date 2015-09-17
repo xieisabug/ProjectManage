@@ -1,5 +1,7 @@
 package interfacemanage
 
+import system.Project
+
 /**
  * 接口管理类
  * 对每个接口对象进行管理
@@ -20,7 +22,7 @@ class InterfaceObjectController {
     def getCategory() {
         //render方法是将数据渲染，这里是渲染成json数据
         render(contentType: "text/json") {
-            Category.list()
+            Category.findAllByProject(session['project'] as Project)
         }
     }
 

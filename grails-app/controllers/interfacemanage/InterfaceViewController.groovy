@@ -1,6 +1,7 @@
 package interfacemanage
 
 import com.squareup.okhttp.FormEncodingBuilder
+import system.Project
 
 import java.util.ResourceBundle.RBClassLoader;
 
@@ -33,7 +34,7 @@ class InterfaceViewController {
 	def getCategory() {
 		//render方法是将数据渲染，这里是渲染成json数据
 		render(contentType: "text/json") {
-			Category.list()
+			Category.findAllByProject(session['project'] as Project)
 		}
 	}
 
