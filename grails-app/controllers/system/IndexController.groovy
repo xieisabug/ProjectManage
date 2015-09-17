@@ -2,40 +2,32 @@ package system
 
 class IndexController {
 
-    def index() {
-        if (session.user == null) {
-            redirect(action: "login")
+    def beforeInterceptor = [action: this.&auth, except: ['login', 'loginExecute']]
+
+    def auth() {
+        if(!session.user) {
+            redirect(action:'login')
+            return false
         }
     }
 
-    def login() {}
+    def index = {
+        session.projectId = params['id']
+    }
 
-    def loginExecute() {
-        def p =  request.JSON
+    def login = {}
 
-        def user = User.findByUsernameAndPassword(p['username'] as String, (p['password'] as String).encodeAsBase64())
+    def loginExecute = {
+        def p = request.JSON
+
+        def user = User.findByUsernameAndPassword(p['username'] as String, (p['password'] as String).encodeAsMD5())
         if (user) {
             session.user = user
 
             render(contentType: "text/json") {
                 success = true
                 data = {
-                    create = array {
-                        for (project in user.createProject) {
-                            element {
-                                id = project.id
-                                name = project.name
-                            }
-                        }
-                    }
-                    join = array {
-                        for (project in user.joinProject) {
-                            element {
-                                id = project.id
-                                name = project.name
-                            }
-                        }
-                    }
+                    url = "/InterfaceManage/index/chooseProject"
                 }
             }
         } else {
@@ -43,5 +35,10 @@ class IndexController {
                 success = false
             }
         }
+    }
+
+    def chooseProject = {
+        User user = User.get(session.user.id);
+        [joinProject: user.getJoinProject(), createProject: user.getCreateProject()]
     }
 }

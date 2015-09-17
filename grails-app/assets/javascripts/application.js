@@ -7,7 +7,9 @@ app.controller('Login', function ($scope, $http) {
         console.log($scope.user);
         $http.post('/InterfaceManage/index/loginExecute', $scope.user)
             .success(function (response) {
-                console.log(response);
+                if(response.success) {
+                    location.href = response.data.url;
+                }
             });
     };
 

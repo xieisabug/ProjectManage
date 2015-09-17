@@ -33,7 +33,7 @@
     padding: 5px;
 }
 
-#login-container {
+#login-container, #project-container {
     background: rgb(63,81,181);
     height: 100%;
 }
@@ -42,4 +42,13 @@
     width: 560px;
     margin: 150px auto;
     padding: 30px 30px 0 30px;
+}
+
+.project-container-sub {
+    width: 960px;
+    min-height: 150px;
+    margin: 20px auto;
+}
+.project-container-sub p {
+    color: white;
 }
