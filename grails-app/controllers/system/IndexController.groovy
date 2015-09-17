@@ -12,7 +12,7 @@ class IndexController {
     }
 
     def index = {
-        session.projectId = params['id']
+        session.project = Project.findById(params['id'] as Long)
     }
 
     def login = {}

@@ -14,7 +14,7 @@ class WikiController {
 
     def go() {
         def name = params.name;
-        def wiki = Wiki.findOrCreateWhere(name: name)
+        def wiki = Wiki.findOrCreateWhere(name: name, project: session.project)
         return [wiki: wiki];
     }
 
@@ -25,6 +25,7 @@ class WikiController {
         } else {
             wiki.content = params.content
         }
+        wiki.project = session.project
         if (!wiki.hasErrors() && wiki.save(flush: true, failOnError: true)) {
             redirect(action: 'go', params: [name: wiki.name])
         } else {
