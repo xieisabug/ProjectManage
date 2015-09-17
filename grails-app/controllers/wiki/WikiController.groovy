@@ -1,5 +1,7 @@
 package wiki
 
+import system.Project
+
 class WikiController {
 
     def index() {
@@ -14,7 +16,7 @@ class WikiController {
 
     def go() {
         def name = params.name;
-        def wiki = Wiki.findOrCreateWhere(name: name, project: session.project)
+        def wiki = Wiki.findOrCreateWhere(name: name, project: session['project'] as Project)
         return [wiki: wiki];
     }
 
