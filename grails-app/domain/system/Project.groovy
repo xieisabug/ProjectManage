@@ -1,5 +1,9 @@
 package system
 
+import interfacemanage.Category
+import requirementmanage.Product
+import wiki.Wiki
+
 class Project {
 
     String name //项目名
@@ -8,7 +12,7 @@ class Project {
     Date lastUpdated
 
     static belongsTo = [User]
-    static hasMany = [members: User]
+    static hasMany = [members: User, wikis: Wiki, categorys: Category, products: Product]
 
     static constraints = {
     }

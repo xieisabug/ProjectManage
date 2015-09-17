@@ -1,5 +1,7 @@
 package requirementmanage
 
+import system.Project
+
 class Product {
     int id;
     String name;
@@ -8,6 +10,7 @@ class Product {
     Date dateCreated
     Date lastUpdated
 
+    static belongsTo = [project: Project]
     static hasMany = [requirements : Requirement]
     static constraints = {
     }
