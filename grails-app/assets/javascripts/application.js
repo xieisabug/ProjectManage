@@ -37,24 +37,65 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         $scope.currentCategory = category;
     };
 
-    $scope.addInterfaceObject = function (ev) {
+    $scope.openAddCategoryDialog = function(ev) {
         $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html',
+            controller: AddCategoryDialogController,
+            templateUrl: '/InterfaceManage/addCategoryDialog.tmpl.html',
             parent: document.body,
             targetEvent: ev
-        }).then(function(newInterfaceObject){
-            newInterfaceObject.categoryId = $scope.currentCategory.id;
-            $http.post('/InterfaceManage/interfaceObject/addInterfaceObject', newInterfaceObject)
+        }).then(function(newCategory){
+            $http.post('/InterfaceManage/interfaceObject/addInterfaceObject', newCategory)
                 .success(function (response) {
                     console.log(response);
                     if(response.success) {
-                        $scope.interface.push(newInterfaceObject)
+                        $scope.category.push(newCategory)
                     }
                 });
         }, function(){
 
         });
+        function AddCategoryDialogController($scope){
+            $scope.newCategory = {};
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.add = function() {
+                $mdDialog.hide($scope.newCategory);
+            };
+        }
+    };
+
+    $scope.addInterfaceObject = function (ev) {
+        if ($scope.currentCategory) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html',
+                parent: document.body,
+                targetEvent: ev
+            }).then(function(newInterfaceObject){
+                newInterfaceObject.categoryId = $scope.currentCategory.id;
+                $http.post('/InterfaceManage/interfaceObject/addInterfaceObject', newInterfaceObject)
+                    .success(function (response) {
+                        console.log(response);
+                        if(response.success) {
+                            $scope.interface.push(newInterfaceObject)
+                        }
+                    });
+            }, function(){
+
+            });
+        } else {
+            var alert = $mdDialog.alert()
+                .title("错误")
+                .content("请先选择一个类别")
+                .ok("确定");
+            $mdDialog.show(alert);
+        }
+
     };
 
     $scope.deleteInterfaceObject = function (ev, interfaceObject, index) {

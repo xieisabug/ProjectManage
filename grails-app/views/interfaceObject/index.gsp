@@ -19,6 +19,7 @@
     <div layout="row">
         <md-whiteframe flex="20" id="category-list" class="md-whiteframe-z1">
             <md-button ng-repeat="item in category" ng-click="changeCategory(item)">{{item.name}}</md-button>
+            <md-button ng-click="openAddCategoryDialog($event)">添加</md-button>
         </md-whiteframe>
 
         <div flex style="margin-left: 20px;">

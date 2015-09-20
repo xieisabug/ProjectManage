@@ -1,0 +1,20 @@
+<md-dialog aria-label="新建类别" style="width:400px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>新建类别</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div layout="row">
+            <md-input-container flex>
+                <label>名称</label>
+                <input ng-model="newCategory.name">
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="add()" class="md-primary md-raised" style="width: 100px; height: 30px;">
+            确定
+        </md-button>
+    </div>
+</md-dialog>
