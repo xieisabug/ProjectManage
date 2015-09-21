@@ -16,17 +16,6 @@ class InterfaceObjectController {
     }
 
     /**
-     * 获取所有接口的列表，返回json数据
-     * @return 所有接口列表的json
-     */
-    def getCategory() {
-        //render方法是将数据渲染，这里是渲染成json数据
-        render(contentType: "text/json") {
-            Category.findAllByProject(session['project'] as Project)
-        }
-    }
-
-    /**
      * 删除某个接口对象
      * @return 删除成功或者失败
      */

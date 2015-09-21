@@ -19,7 +19,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.interface = [];
     $scope.currentCategory = null;
 
-    $http.get('/InterfaceManage/interfaceObject/getCategory').success(function (response) {
+    $http.get('/InterfaceManage/category/getCategory').success(function (response) {
         if (response && response.length != 0) {
             $scope.category = response;
             $scope.interface = $scope.category[0].interfaceObjects;
@@ -44,7 +44,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             parent: document.body,
             targetEvent: ev
         }).then(function(newCategory){
-            $http.post('/InterfaceManage/interfaceObject/addInterfaceObject', newCategory)
+            $http.post('/InterfaceManage/category/addCategory', newCategory)
                 .success(function (response) {
                     console.log(response);
                     if(response.success) {
@@ -96,6 +96,37 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             $mdDialog.show(alert);
         }
 
+        function DialogController($scope){
+            $scope.newInterface = {
+                name:'',
+                link:'',
+                method:'POST',
+                returnExample:'',
+                remark:'',
+                params:[
+                ]
+            };
+            $scope.paramName="";
+            $scope.paramRemark="";
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.add = function() {
+                $mdDialog.hide($scope.newInterface);
+            };
+            $scope.addParam = function(){
+                $scope.newInterface.params.push({name:$scope.paramName, remark:$scope.paramRemark});
+                $scope.paramName = "";
+                $scope.paramRemark = "";
+            };
+            $scope.deleteNewInterface = function(item) {
+                $scope.newInterface.params.splice(item,1);
+            }
+        }
     };
 
     $scope.deleteInterfaceObject = function (ev, interfaceObject, index) {
@@ -191,37 +222,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         }
     };
 
-    function DialogController($scope){
-        $scope.newInterface = {
-            name:'',
-            link:'',
-            method:'POST',
-            returnExample:'',
-            remark:'',
-            params:[
-            ]
-        };
-        $scope.paramName="";
-        $scope.paramRemark="";
 
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.add = function() {
-            $mdDialog.hide($scope.newInterface);
-        };
-        $scope.addParam = function(){
-            $scope.newInterface.params.push({name:$scope.paramName, remark:$scope.paramRemark});
-            $scope.paramName = "";
-            $scope.paramRemark = "";
-        };
-        $scope.deleteNewInterface = function(item) {
-            $scope.newInterface.params.splice(item,1);
-        }
-    }
 });
 app.controller('InterfaceView',function($scope, $http, $mdDialog){
     $scope.category = [];
@@ -229,7 +230,7 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
         selectedIndex:0
     };
 
-    $http.get('/InterfaceManage/interfaceView/getCategory').success(function (response) {
+    $http.get('/InterfaceManage/category/getCategory').success(function (response) {
         if (response && response.length != 0) {
             $scope.category = response;
             //console.log($scope.category);
