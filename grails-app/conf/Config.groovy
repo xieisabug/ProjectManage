@@ -102,6 +102,7 @@ log4j.main = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
+    debug 'org.springframework.security'
 
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -115,3 +116,22 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'system.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'system.UserRole'
+grails.plugin.springsecurity.authority.className = 'system.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
+]
+grails.plugin.springsecurity.auth.ajaxLoginFormUrl = '/index/authAjax'
+grails.plugin.springsecurity.auth.loginFormUrl = '/index/auth'
+grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/index/authfail?ajax=true'
+grails.plugin.springsecurity.successHandler.ajaxSuccessUrl = '/index/ajaxSuccess'
+grails.plugin.springsecurity.rememberMe.alwaysRemember = true
+

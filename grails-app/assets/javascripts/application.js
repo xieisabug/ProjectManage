@@ -3,14 +3,18 @@ app.controller('Login', function ($scope, $http) {
 
     $scope.user = {};
 
-    $scope.login = function() {
+    $scope.login = function (url) {
         console.log($scope.user);
-        $http.post('/InterfaceManage/index/loginExecute', $scope.user)
-            .success(function (response) {
-                if(response.success) {
-                    location.href = response.data.url;
-                }
-            });
+        $http.post(url, $scope.user, {
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            transformRequest: function (data) {
+                return "j_username=" + data.username + "&j_password=" + data.password + "&ajax=true";
+            }
+        }).success(function (response) {
+            if (response.success) {
+                location.href = response.data.url;
+            }
+        });
     };
 
 });

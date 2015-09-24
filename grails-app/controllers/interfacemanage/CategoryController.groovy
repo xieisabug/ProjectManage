@@ -1,10 +1,6 @@
 package interfacemanage
 
-import grails.converters.JSON
 import system.Project
-
-import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
 /**
  * 接口类别管理

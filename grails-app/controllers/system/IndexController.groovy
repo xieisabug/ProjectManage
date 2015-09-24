@@ -1,44 +1,142 @@
 package system
 
+import grails.converters.JSON
+import grails.plugin.springsecurity.SpringSecurityUtils
+import org.springframework.security.access.annotation.Secured
+import org.springframework.security.authentication.AccountExpiredException
+import org.springframework.security.authentication.CredentialsExpiredException
+import org.springframework.security.authentication.DisabledException
+import org.springframework.security.authentication.LockedException
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.web.WebAttributes
+
+import javax.servlet.http.HttpServletResponse
+
+@Secured('permitAll')
 class IndexController {
+    /**
+     * Dependency injection for the authenticationTrustResolver.
+     */
+    def authenticationTrustResolver
 
-    def beforeInterceptor = [action: this.&auth, except: ['login', 'loginExecute']]
-
-    def auth() {
-        if(!session.user) {
-            redirect(action:'login')
-            return false
-        }
-    }
+    /**
+     * Dependency injection for the springSecurityService.
+     */
+    def springSecurityService
 
     def index = {
         session.project = Project.findById(params['id'] as Long)
     }
 
-    def login = {}
+    def chooseProject = {
+        User user = User.get(springSecurityService.getCurrentUserId() as Long);
+        [joinProject: user.getJoinProject(), createProject: user.getCreateProject()]
+    }
 
-    def loginExecute = {
-        def p = request.JSON
-
-        def user = User.findByUsernameAndPassword(p['username'] as String, (p['password'] as String).encodeAsMD5())
-        if (user) {
-            session.user = user
-
-            render(contentType: "text/json") {
-                success = true
-                data = {
-                    url = "/InterfaceManage/index/chooseProject"
-                }
-            }
-        } else {
-            render(contentType: "text/json") {
-                success = false
-            }
+    /**
+     * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
+     */
+    def index() {
+        if (springSecurityService.isLoggedIn()) {
+            redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
+        }
+        else {
+            redirect action: 'auth', params: params
         }
     }
 
-    def chooseProject = {
-        User user = User.get(session.user.id);
-        [joinProject: user.getJoinProject(), createProject: user.getCreateProject()]
+    /**
+     * Show the login page.
+     */
+    def auth() {
+
+        def config = SpringSecurityUtils.securityConfig
+
+        if (springSecurityService.isLoggedIn()) {
+            redirect uri: config.successHandler.defaultTargetUrl
+            return
+        }
+
+        String view = 'auth'
+        String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
+        render view: view, model: [postUrl: postUrl,
+                                   rememberMeParameter: config.rememberMe.parameter]
+    }
+
+    /**
+     * The redirect action for Ajax requests.
+     */
+    def authAjax() {
+        response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
+        response.sendError HttpServletResponse.SC_UNAUTHORIZED
+    }
+
+    /**
+     * Show denied page.
+     */
+    def denied() {
+        if (springSecurityService.isLoggedIn() &&
+                authenticationTrustResolver.isRememberMe(SecurityContextHolder.context?.authentication)) {
+            // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
+            redirect action: 'full', params: params
+        }
+    }
+
+    /**
+     * Login page for users with a remember-me cookie but accessing a IS_AUTHENTICATED_FULLY page.
+     */
+    def full() {
+        def config = SpringSecurityUtils.securityConfig
+        render view: 'auth', params: params,
+                model: [hasCookie: authenticationTrustResolver.isRememberMe(SecurityContextHolder.context?.authentication),
+                        postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
+    }
+
+    /**
+     * Callback after a failed login. Redirects to the auth page with a warning message.
+     */
+    def authfail() {
+
+        String msg = ''
+        def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
+        if (exception) {
+            if (exception instanceof AccountExpiredException) {
+                msg = g.message(code: "springSecurity.errors.login.expired")
+            }
+            else if (exception instanceof CredentialsExpiredException) {
+                msg = g.message(code: "springSecurity.errors.login.passwordExpired")
+            }
+            else if (exception instanceof DisabledException) {
+                msg = g.message(code: "springSecurity.errors.login.disabled")
+            }
+            else if (exception instanceof LockedException) {
+                msg = g.message(code: "springSecurity.errors.login.locked")
+            }
+            else {
+                msg = g.message(code: "springSecurity.errors.login.fail")
+            }
+        }
+
+        if (springSecurityService.isAjax(request)) {
+            render([error: msg] as JSON)
+        }
+        else {
+            flash.message = msg
+            redirect action: 'auth', params: params
+        }
+    }
+
+    /**
+     * The Ajax success redirect url.
+     */
+    def ajaxSuccess() {
+        render([success: true, data: [url : "${request.contextPath}/index/chooseProject"]] as JSON)
+    }
+
+    /**
+     * The Ajax denied redirect url.
+     */
+    def ajaxDenied() {
+        render([error: 'access denied'] as JSON)
     }
 }

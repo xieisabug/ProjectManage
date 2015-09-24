@@ -7,7 +7,6 @@
 </head>
 
 <body>
-
 <div id="login-container" flex ng-controller="Login">
 
         <md-card id="login-card" layout-align="center center">
@@ -23,7 +22,7 @@
                 </md-input-container>
             </md-content>
             <md-button class="md-fab md-primary md-hue-2" aria-label="Profile"
-                       style="position: relative; bottom: -35px;" ng-click="login()">
+                       style="position: relative; bottom: -35px;" ng-click="login('${postUrl}')">
                 <md-icon md-svg-icon="action:ic_done_24px"></md-icon>
             </md-button>
         </md-card>
