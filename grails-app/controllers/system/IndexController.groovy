@@ -25,7 +25,9 @@ class IndexController {
     def springSecurityService
 
     def index = {
-        session.project = Project.findById(params['id'] as Long)
+        if (params['id'] != null) {
+            session.project = Project.findById(params['id'] as Long)
+        }
     }
 
     def chooseProject = {

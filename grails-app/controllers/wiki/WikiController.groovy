@@ -1,10 +1,10 @@
 package wiki
 
+import org.springframework.security.access.annotation.Secured
 import system.Project
 
+@Secured('isAuthenticated()')
 class WikiController {
-
-    def beforeInterceptor = [action: this.&auth]
 
     def auth() {
         if(!session.user) {
