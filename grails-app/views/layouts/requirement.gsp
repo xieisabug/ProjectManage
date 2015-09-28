@@ -26,7 +26,10 @@
 <asset:javascript src="requirement.js"/>
 <div id="container">
     <md-toolbar class="md-medium-tall">
-        <h2 class="md-toolbar-tools"><a href="<g:createLink controller="index"/>">项目管理工具</a></h2>
+        <h2 class="md-toolbar-tools">
+            <a href="<g:createLink controller="index"/>">项目管理工具</a>
+            <a style="font-size: 12px; margin-left: 20px;" href="<g:createLink controller="index" action="chooseProject">">${session?.project?.name}</a>
+        </h2>
     </md-toolbar>
 </div>
 
