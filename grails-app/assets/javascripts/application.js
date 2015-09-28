@@ -44,7 +44,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.openAddCategoryDialog = function(ev) {
         $mdDialog.show({
             controller: AddCategoryDialogController,
-            templateUrl: '/InterfaceManage/addCategoryDialog.tmpl.html',
+            templateUrl: '/InterfaceManage/assets/addCategoryDialog.tmpl.html',
             parent: document.body,
             targetEvent: ev
         }).then(function(newCategory){
@@ -52,6 +52,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
                 .success(function (response) {
                     console.log(response);
                     if(response.success) {
+                        newCategory.id = response.data;
                         $scope.category.push(newCategory)
                     }
                 });
@@ -77,7 +78,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         if ($scope.currentCategory) {
             $mdDialog.show({
                 controller: DialogController,
-                templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html',
+                templateUrl: '/InterfaceManage/assets/addInterfaceDialog.tmpl.html',
                 parent: document.body,
                 targetEvent: ev
             }).then(function(newInterfaceObject){
@@ -159,7 +160,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             locals:{
                 interfaceObject : interfaceObject
             },
-            templateUrl: '/InterfaceManage/addInterfaceDialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/assets/addInterfaceDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
         }).then(function(newInterfaceObject){
             newInterfaceObject.categoryId = $scope.currentCategory.id;
@@ -244,7 +245,7 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
     $scope.changeLink = function(interfaceObject, parentIndex, index, ev){
         $mdDialog.show({
             controller: ChangeLinkDialogController,
-            templateUrl: '/InterfaceManage/changeLinkDialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/assets/changeLinkDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
         }).then(function(newLink){
             interfaceObject.link = newLink;

@@ -1,6 +1,7 @@
 package interfacemanage
 
 import com.squareup.okhttp.FormEncodingBuilder
+import org.springframework.security.access.annotation.Secured
 import system.Project
 
 import java.util.ResourceBundle.RBClassLoader;
@@ -16,6 +17,7 @@ import com.squareup.okhttp.Response
  * 访问接口
  * 用于在测试接口的时候，访问网络，获取数据
  */
+@Secured('isAuthenticated()')
 class InterfaceViewController {
 	OkHttpClient client = new OkHttpClient();
 	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");

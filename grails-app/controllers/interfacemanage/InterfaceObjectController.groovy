@@ -1,11 +1,12 @@
 package interfacemanage
 
-import system.Project
+import org.springframework.security.access.annotation.Secured
 
 /**
  * 接口管理类
  * 对每个接口对象进行管理
  */
+@Secured('isAuthenticated()')
 class InterfaceObjectController {
 
     /**
