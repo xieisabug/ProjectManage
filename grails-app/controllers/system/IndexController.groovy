@@ -34,18 +34,6 @@ class IndexController {
     }
 
     /**
-     * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
-     */
-    def index() {
-        if (springSecurityService.isLoggedIn()) {
-            redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
-        }
-        else {
-            redirect action: 'auth', params: params
-        }
-    }
-
-    /**
      * Show the login page.
      */
     def auth() {
