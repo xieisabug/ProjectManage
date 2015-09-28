@@ -27,7 +27,7 @@
 
 <div id="container">
     <md-toolbar class="md-medium-tall">
-        <h2 class="md-toolbar-tools">项目工具集</h2>
+        <h2 class="md-toolbar-tools"><a href="<g:createLink controller="index"/>">项目管理工具</a></h2>
     </md-toolbar>
 </div>
 
