@@ -10,8 +10,6 @@
 
     <md-toolbar layout="row" style="margin-bottom: 20px;">
         <div class="md-toolbar-tools">
-            <md-button class="md-raised md-primary" md-theme="green"
-                       style="width: 100px; height:30px; margin-right: 5px;" ng-click="home()">主页</md-button>
             <md-button style="width: 100px; height:30px;" ng-click="addInterfaceObject($event)">添加接口</md-button>
         </div>
     </md-toolbar>

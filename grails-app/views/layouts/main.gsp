@@ -18,12 +18,6 @@
 </head>
 
 <body layout="column">
-<asset:javascript src="hammer.min.js"/>
-<asset:javascript src="angular.js"/>
-<asset:javascript src="angular-animate.js"/>
-<asset:javascript src="angular-aria.js"/>
-<asset:javascript src="docs.js"/>
-<asset:javascript src="application.js"/>
 
 <div id="container">
     <md-toolbar class="md-medium-tall">
@@ -35,5 +29,12 @@
 </div>
 
 <g:layoutBody/>
+
+<asset:javascript src="hammer.min.js"/>
+<asset:javascript src="angular.js"/>
+<asset:javascript src="angular-animate.js"/>
+<asset:javascript src="angular-aria.js"/>
+<asset:javascript src="docs.js"/>
+<asset:javascript src="application.js"/>
 </body>
 </html>
