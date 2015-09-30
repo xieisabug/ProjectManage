@@ -25,7 +25,8 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
     $scope.addProduct = function(ev) {
         $mdDialog.show({
             controller: AddProductController,
-            templateUrl: '/InterfaceManage/assets/addProductDialog.tmpl.html?t='+new Date(),
+            templateUrl: '/InterfaceManage/assets/addProductDialog.tmpl.html',
+            parent: document.body,
             targetEvent: ev
         }).then(function(newProduct){
             console.log(newProduct);
@@ -39,6 +40,24 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
         }, function(){
 
         });
+
+        function AddProductController($scope){
+            $scope.newProduct = {
+                name:"",
+                introduce:"",
+                logo:""
+            };
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.submit = function() {
+                $mdDialog.hide($scope.newProduct);
+            };
+        }
     };
 
     $scope.addRequirement = function(){
@@ -50,21 +69,4 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
             });
     };
 
-    function AddProductController($scope){
-        $scope.newProduct = {
-            name:"",
-            introduce:"",
-            logo:""
-        };
-
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.submit = function() {
-            $mdDialog.hide($scope.newProduct);
-        };
-    }
 });

@@ -1,9 +1,9 @@
 package requirementmanage
 
+import org.springframework.security.access.annotation.Secured
+import system.Project
 
-import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
-
+@Secured('isAuthenticated()')
 class ProductController {
 
     def index(){
@@ -14,7 +14,7 @@ class ProductController {
         def p = request.JSON
         Product product = new Product()
         product.setProperties(p)
-        product.setCreateDate(new Date())
+        product.setProject(session["project"] as Project)
         product.save(flush: true, failOnError: true)
         render(contentType: "text/json") {
             success = true

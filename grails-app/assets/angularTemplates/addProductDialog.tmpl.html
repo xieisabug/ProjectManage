@@ -1,16 +1,29 @@
 <md-dialog aria-label="新增项目" style="width:400px;">
-    <md-content>
-        <md-subheader class="md-sticky-no-effect">新增项目</md-subheader>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>新增项目</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
         <div layout="row">
-            <md-text-float label="项目名" ng-model="newProduct.name" flex></md-text-float>
+            <md-input-container flex>
+                <label>项目名</label>
+                <input ng-model="newProduct.name">
+            </md-input-container>
         </div>
         <div layout="row">
-            <md-text-float label="简介" ng-model="newProduct.introduce" flex></md-text-float>
+            <md-input-container flex>
+                <label>简介</label>
+                <input ng-model="newProduct.introduce">
+            </md-input-container>
         </div>
         <div layout="row">
-            <md-text-float label="LOGO" ng-model="newProduct.logo" flex></md-text-float>
+            <md-input-container flex>
+                <label>LOGO</label>
+                <input ng-model="newProduct.logo">
+            </md-input-container>
         </div>
-    </md-content>
+    </md-dialog-content>
     <div class="md-actions" layout="row">
         <md-button ng-click="submit()" class="md-primary md-raised" style="width: 100px; height: 30px;">
             添加
