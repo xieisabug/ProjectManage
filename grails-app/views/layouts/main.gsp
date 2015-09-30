@@ -19,6 +19,16 @@
 
 <body layout="column">
 
+<script type="text/javascript">
+    context = "${request.getContextPath()}";
+</script>
+<asset:javascript src="hammer.min.js"/>
+<asset:javascript src="angular.js"/>
+<asset:javascript src="angular-animate.js"/>
+<asset:javascript src="angular-aria.js"/>
+<asset:javascript src="docs.js"/>
+<asset:javascript src="application.js"/>
+
 <div id="container">
     <md-toolbar class="md-medium-tall">
         <h2 class="md-toolbar-tools">
@@ -30,11 +40,5 @@
 
 <g:layoutBody/>
 
-<asset:javascript src="hammer.min.js"/>
-<asset:javascript src="angular.js"/>
-<asset:javascript src="angular-animate.js"/>
-<asset:javascript src="angular-aria.js"/>
-<asset:javascript src="docs.js"/>
-<asset:javascript src="application.js"/>
 </body>
 </html>

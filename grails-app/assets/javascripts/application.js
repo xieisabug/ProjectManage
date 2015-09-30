@@ -23,7 +23,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.interface = [];
     $scope.currentCategory = null;
 
-    $http.get('/InterfaceManage/category/getCategory').success(function (response) {
+    $http.get(context + '/category/getCategory').success(function (response) {
         if (response && response.length != 0) {
             $scope.category = response;
             $scope.interface = $scope.category[0].interfaceObjects;
@@ -40,11 +40,11 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
     $scope.openAddCategoryDialog = function(ev) {
         $mdDialog.show({
             controller: AddCategoryDialogController,
-            templateUrl: '/InterfaceManage/assets/addCategoryDialog.tmpl.html',
+            templateUrl: context + '/assets/addCategoryDialog.tmpl.html',
             parent: document.body,
             targetEvent: ev
         }).then(function(newCategory){
-            $http.post('/InterfaceManage/category/addCategory', newCategory)
+            $http.post(context + '/category/addCategory', newCategory)
                 .success(function (response) {
                     console.log(response);
                     if(response.success) {
@@ -74,12 +74,12 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
         if ($scope.currentCategory) {
             $mdDialog.show({
                 controller: DialogController,
-                templateUrl: '/InterfaceManage/assets/addInterfaceDialog.tmpl.html',
+                templateUrl: context + '/assets/addInterfaceDialog.tmpl.html',
                 parent: document.body,
                 targetEvent: ev
             }).then(function(newInterfaceObject){
                 newInterfaceObject.categoryId = $scope.currentCategory.id;
-                $http.post('/InterfaceManage/interfaceObject/addInterfaceObject', newInterfaceObject)
+                $http.post(context + '/interfaceObject/addInterfaceObject', newInterfaceObject)
                     .success(function (response) {
                         console.log(response);
                         if(response.success) {
@@ -139,7 +139,7 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             .cancel('取消')
             .targetEvent(ev);
         $mdDialog.show(confirm).then(function() {
-            $http.post('/InterfaceManage/interfaceObject/deleteInterfaceObject', {id: interfaceObject.id})
+            $http.post(context + '/interfaceObject/deleteInterfaceObject', {id: interfaceObject.id})
                 .success(function (response) {
                     if(response.success) {
                         $scope.interface.splice(index, 1);
@@ -156,11 +156,11 @@ app.controller('InterfaceObject', function ($scope, $http, $mdDialog) {
             locals:{
                 interfaceObject : interfaceObject
             },
-            templateUrl: '/InterfaceManage/assets/addInterfaceDialog.tmpl.html?t='+new Date(),
+            templateUrl: context + '/assets/addInterfaceDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
         }).then(function(newInterfaceObject){
             newInterfaceObject.categoryId = $scope.currentCategory.id;
-            $http.post('/InterfaceManage/interfaceObject/updateInterfaceObject', newInterfaceObject)
+            $http.post(context + '/interfaceObject/updateInterfaceObject', newInterfaceObject)
                 .success(function (response) {
                     console.log(response);
                     var alert;
@@ -231,7 +231,7 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
         selectedIndex:0
     };
 
-    $http.get('/InterfaceManage/category/getCategory').success(function (response) {
+    $http.get(context + '/category/getCategory').success(function (response) {
         if (response && response.length != 0) {
             $scope.category = response;
             //console.log($scope.category);
@@ -241,11 +241,11 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
     $scope.changeLink = function(interfaceObject, parentIndex, index, ev){
         $mdDialog.show({
             controller: ChangeLinkDialogController,
-            templateUrl: '/InterfaceManage/assets/changeLinkDialog.tmpl.html?t='+new Date(),
+            templateUrl: context + '/assets/changeLinkDialog.tmpl.html?t='+new Date(),
             targetEvent: ev
         }).then(function(newLink){
             interfaceObject.link = newLink;
-            $http.post('/InterfaceManage/interfaceObject/changeLink', interfaceObject)
+            $http.post(context + '/interfaceObject/changeLink', interfaceObject)
                 .success(function (response) {
                     console.log(response);
                     console.log(interfaceObject);
@@ -281,7 +281,7 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
 
     $scope.requirementContent = '';
 
-    $http.get('/InterfaceManage/product/listProduct').success(function(response){
+    $http.get(context + '/product/listProduct').success(function(response){
         if(response && response.length) {
             $scope.productList = response;
         }
@@ -299,12 +299,12 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
     $scope.addProduct = function(ev) {
         $mdDialog.show({
             controller: AddProductController,
-            templateUrl: '/InterfaceManage/assets/addProductDialog.tmpl.html',
+            templateUrl: context + '/assets/addProductDialog.tmpl.html',
             parent: document.body,
             targetEvent: ev
         }).then(function(newProduct){
             console.log(newProduct);
-            $http.post('/InterfaceManage/Product/addProduct', newProduct)
+            $http.post(context + '/product/addProduct', newProduct)
                 .success(function (response) {
                     console.log(response);
                     if(response.success) {
@@ -335,7 +335,7 @@ app.controller('Product', function ($scope, $http, $mdDialog) {
     };
 
     $scope.addRequirement = function(){
-        $http.post('/InterfaceManage/Requirement/addRequirement', {detail: $scope.requirementContent, productId:$scope.currentProduct.id})
+        $http.post(context + '/requirement/addRequirement', {detail: $scope.requirementContent, productId:$scope.currentProduct.id})
             .success(function (response) {
                 console.log(response);
                 if(response.success) {
