@@ -1,6 +1,8 @@
 
 class ProjectChooseFilters {
 
+    def springSecurityService
+
     def filters = {
         all(controller:'*', action:'*', uriExclude:'/assets/**') {
             before = {
@@ -10,7 +12,7 @@ class ProjectChooseFilters {
                 }
             }
             after = { Map model ->
-                if (controllerName == "index" && actionName == "index" && session['project'] == null) {
+                if (controllerName == "index" && actionName == "index" && session['project'] == null && springSecurityService.getCurrentUser() != null) {
                     redirect(controller: "index", action: "chooseProject")
                 }
             }
