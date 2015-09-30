@@ -17,4 +17,8 @@ class Category {
     static constraints = {
 		name blank:false , unique: true
     }
+
+    static mapping = {
+        interfaceObjects sort :'id', order:'desc'
+    }
 }

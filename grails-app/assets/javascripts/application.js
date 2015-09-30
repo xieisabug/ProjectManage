@@ -241,7 +241,8 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
     $scope.changeLink = function(interfaceObject, parentIndex, index, ev){
         $mdDialog.show({
             controller: ChangeLinkDialogController,
-            templateUrl: context + '/assets/changeLinkDialog.tmpl.html?t='+new Date(),
+            templateUrl: context + '/assets/changeLinkDialog.tmpl.html',
+            parent: document.body,
             targetEvent: ev
         }).then(function(newLink){
             interfaceObject.link = newLink;
@@ -257,21 +258,21 @@ app.controller('InterfaceView',function($scope, $http, $mdDialog){
         }, function(){
 
         });
+
+        function ChangeLinkDialogController($scope){
+            $scope.newLink = '';
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.submit = function() {
+                $mdDialog.hide($scope.newLink);
+            };
+        }
     };
-    function ChangeLinkDialogController($scope){
-        $scope.newLink = '';
-
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
-        $scope.submit = function() {
-            $mdDialog.hide($scope.newLink);
-        };
-    }
-
 });
 app.controller('Product', function ($scope, $http, $mdDialog) {
 

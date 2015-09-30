@@ -7,11 +7,12 @@
 </head>
 
 <body>
-<div ng-controller="InterfaceView">
-    <md-tabs md-selected="data.selectedIndex"  style="width: 960px; margin: 0 auto;">
+<div ng-controller="InterfaceView" flex>
+    <md-tabs md-dynamic-height md-border-bottom md-selected="data.selectedIndex"  style="width: 960px; margin: 0 auto; ">
         <md-tab ng-repeat="c in category" label="{{c.name}}" layout="row">
-                <md-card ng-repeat="interfaceObject in c.interfaceObjects" flex="30" style="float: left;">
-                    <div class="card">
+            <md-content class="md-padding">
+                <md-card ng-repeat="interfaceObject in c.interfaceObjects" style="float: left; width: 293px;">
+                    <md-card-content>
                         <div class="field">接口名：{{interfaceObject.name}}</div>
 
                         <div class="field">接口方法类型：{{interfaceObject.method}}</div>
@@ -34,8 +35,9 @@
                                 <input type="submit" name="submit" value="测试">
                             </form>
                         </div>
-                    </div>
+                    </md-card-content>
                 </md-card>
+            </md-content>
         </md-tab>
     </md-tabs>
 </div>

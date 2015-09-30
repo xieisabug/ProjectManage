@@ -1,10 +1,17 @@
 <md-dialog aria-label="更改接口测试地址" style="width:400px;">
-    <md-content>
-        <md-subheader class="md-sticky-no-effect">更改接口测试地址</md-subheader>
-        <div layout="row">
-            <md-text-float label="链接" ng-model="newLink" flex style="margin-top: 0;"></md-text-float>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>更改接口测试地址</h2>
         </div>
-    </md-content>
+    </md-toolbar>
+    <md-dialog-content>
+        <div layout="row">
+            <md-input-container flex>
+                <label>链接</label>
+                <input ng-model="newLink">
+            </md-input-container>
+        </div>
+    </md-dialog-content>
     <div class="md-actions" layout="row">
         <md-button ng-click="submit()" class="md-primary md-raised" style="width: 100px; height: 30px;">
             修改
