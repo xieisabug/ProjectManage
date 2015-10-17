@@ -24,13 +24,15 @@ class IndexController {
      */
     def springSecurityService
 
-    def index = {
+    @Secured("isAuthenticated()")
+    def index() {
         if (params['id'] != null) {
             session.project = Project.findById(params['id'] as Long)
         }
     }
 
-    def chooseProject = {
+    @Secured("isAuthenticated()")
+    def chooseProject() {
         User user = User.get(springSecurityService.getCurrentUserId() as Long);
         [joinProject: user.getJoinProject(), createProject: user.getCreateProject()]
     }
