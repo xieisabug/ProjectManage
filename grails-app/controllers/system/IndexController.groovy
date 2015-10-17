@@ -59,8 +59,8 @@ class IndexController {
      * The redirect action for Ajax requests.
      */
     def authAjax() {
-        response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
-        response.sendError HttpServletResponse.SC_UNAUTHORIZED
+        /*response.setHeader 'Location', SpringSecurityUtils.securityConfig.auth.ajaxLoginFormUrl
+        response.sendError HttpServletResponse.SC_UNAUTHORIZED*/
     }
 
     /**

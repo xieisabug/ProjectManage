@@ -35,7 +35,7 @@
             <a href="<g:createLink controller="index"/>">项目管理工具</a>
             <a style="font-size: 12px; margin-left: 20px;" href="<g:createLink controller="index" action="chooseProject"/>">${session?.project?.name}</a>
             <span flex></span>
-            <md-button ng-href="j_spring_security_logout">
+            <md-button ng-href="${request.contextPath}/j_spring_security_logout">
                 退出登录
             </md-button>
         </h2>
